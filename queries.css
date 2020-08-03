@@ -1,0 +1,417 @@
+
+
+/* bid tablet to mediun computers: from 1001px to 1260px*/
+@media only screen and (max-width: 1260px) {
+    section {
+        width: 96%;
+        padding: 0 2%;
+    }
+    
+    .main {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+    
+    aside {
+        min-height: 600px;
+        background-color: #fff;
+        width: 900px;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1px 0;
+        float: none;
+    }
+ 
+    .aside_contents {
+        padding: 0 20px;
+        margin-top: 40px;
+        margin-bottom: 60px;
+        float: left;
+        }
+    
+    aside .additional {
+        display: block;
+    }
+    
+    .additional img {
+        width: 500px;
+    }
+    
+    .additional {
+        width: 500px;
+        margin: 130px 0;
+        float: left;
+    }
+
+    
+    
+    
+    .list {
+        width: 900px;
+        margin: 0 auto;
+    }
+    
+    .one {
+        display: none;
+    }
+    
+    .two, .three, .four {
+        width: 270px;
+        margin-right: 45px;
+    }
+    
+    
+    .two {
+        margin-left: 0px;
+    }
+    .four {
+        margin-right: 0px;
+    }
+
+
+
+}
+
+
+
+
+
+/* small tablet to big tablets: from 768px to 1000px*/
+@media only screen and (max-width: 960px) {
+    
+    .main {
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    .main .list_container {
+        min-height: 0;
+        padding-bottom: 10px;
+        background-color: #fff;
+    }
+
+    .main .list_container .income {
+        width: 460px;
+        margin: 20px auto;
+        margin-top: 28px;
+        padding: 15px 0;
+        padding-bottom: 45px;
+        float: none;
+    }
+
+    .main .list_container .expense {
+        width: 460px;
+        margin: 20px auto;
+        margin-top: 28px;
+        padding: 15px 0;
+        padding-bottom: 45px;
+        float: none;
+        border-top: 2px solid rgba(23, 228, 255, 0.96);
+    }
+    
+    aside {
+        min-height: 600px;
+        background-color: #fff;
+        width: 88%;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1px 2%;
+        float: none;
+    }
+    
+    
+    .aside_contents {
+        padding: 0 20px;
+        margin-top: 40px;
+        margin-bottom: 60px;
+        float: left;
+        }
+    
+    .additional img {
+        width: 260px;
+    }
+    
+    .additional {
+        width: 240px;
+        margin: 82px 0;
+        float: left;
+    }
+    
+    .list {
+        width: 600px;
+        margin: 0 auto;
+    }
+    
+    .one, .two {
+        display: none;
+    }
+    
+    .two, .three, .four {
+        width: 270px;
+        margin-right: 45px;
+    }
+    
+    
+    .three {
+        margin-left: 0px;
+    }
+    .four {
+        margin-right: 0px;
+    }
+    
+    
+    
+}
+
+
+
+/* special */
+@media only screen and (max-width: 748px) {
+    
+    
+    html, body, header {
+        width: 100%;
+    }
+    
+    .top {
+        height: 250px;
+        position: relative;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .budget {
+        position: relative;
+        width: 90%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+    }
+    
+    
+    
+    aside .additional {
+        display: none;
+    }
+    
+    aside {
+        text-align: center;
+        min-height: 600px;
+        width: 78%;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1px 2%;
+        float: none;
+    }
+     
+    .aside_contents {
+        text-align: center;
+        padding: 0 20px;
+        margin-top: 40px;
+        margin-bottom: 60px;
+        margin-left: 50px;
+    }
+    
+    .list {
+        width: 300px;
+        margin: 0 auto;
+    }
+    
+    
+}
+
+
+
+/* small phones to small tablets: from 481px to 767px*/
+@media only screen and (max-width: 638px) {
+    
+    aside {
+        display: none;
+    }
+    
+    .two, .five {
+        display: block;
+    }
+    
+    .list {
+        width: 300px;
+        margin: 0 auto;
+    }
+    
+    .one {
+        display: none;
+    }
+    
+    .one, .two, .three, .four, .five {
+        width: 270px;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* footer */
+    footer {
+        font-size: 14px;
+    }
+    
+    
+    .social-links {
+        list-style: none;
+        float: right;
+        margin: 54px;
+    }
+    
+    
+    .footer-nav li,
+    .social-links li {
+        display: inline-block;
+        margin-right: 5px;
+    }
+    
+
+    
+    
+
+    
+
+    
+}
+
+
+
+/* small phones: from 0 to 480px*/
+@media only screen and (max-width: 550px) {
+    
+    
+    .main {
+        width: 410px;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+    
+    
+    .main .list_container {
+        background-color: #fff;
+    }
+
+    .main .list_container .income {
+        width: 410px;
+    }
+
+    .main .list_container .expense {
+        width: 460px;
+    }
+    
+    .list {
+        width: 300px;
+        margin: 0 auto;
+    }
+    
+    
+}
+
+/* smallers ...*/
+@media only screen and (max-width: 460px){
+    
+    .description {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+     .main {
+        width: 98%;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+    
+
+    .main .list_container .income {
+        width: 98%;
+        padding-bottom: 45px;
+    }
+
+    .main .list_container .expense {
+        width: 98%;
+        padding-bottom: 45px;
+    }
+    
+    .list {
+        font-size: 16px;
+        width: 300px;
+        margin: 0 auto;
+    }
+    
+    
+}
+
+/* only for the footer part*/
+@media only screen and (max-width: 420px) {
+    
+    .footer{
+        
+    }
+    
+    .social-links li a:link,
+    .social-links li a:visited {
+        font-size: 140%;
+    }
+    
+    .footer-nav, .social-links, .copyright {
+        float: none;
+        text-align: center;
+    }
+    
+    
+  
+
+    .social-links {
+        font-size: 120%;
+    }
+
+   
+
+    .copyright {
+        margin-top: 80px;
+    }
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
