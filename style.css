@@ -12,6 +12,7 @@
 
 body {
     font-size: 20px;
+    font-family: Lato, Arial, sans-serif;
     background: linear-gradient(rgba(79, 248, 255, 0.8), rgba(7, 43, 163, 0.8));
 }
 
