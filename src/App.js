@@ -1,5 +1,5 @@
 function App() {
-  return <h1>Budge App</h1>;
+  return <h1 className="font-light">Budge App</h1>;
 }
 
 export default App;
