@@ -1,5 +1,7 @@
+import Home from "./components/Home";
+
 function App() {
-  return <p className="">Budge App</p>;
+  return <Home />;
 }
 
 export default App;
