@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Navbar from "./common/Navbar";
+import Budget from "./Budget";
 import Form from "./common/Form";
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
 
   const [availableBudget, setAvailableBudget] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
-  const [expenses, setExpenses] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
 
   const [incomeItems, setIncomeItems] = useState([]);
   const [expenseItems, setItems] = useState([]);
@@ -44,15 +45,12 @@ const Home = () => {
       <Navbar />
 
       <div className="container">
-        <div className="flex flex-col items-center p-4">
-          <div className="font-medium">
-            <h4>Total Income: {currency + totalIncome}</h4>
-            <h4>Expenses: {currency + expenses}</h4>
-          </div>
-          <h2 className="font-semibold text-2xl">
-            Available Budget: {currency + availableBudget}
-          </h2>
-        </div>
+        <Budget
+          currency={currency}
+          availableBudget={availableBudget}
+          totalIncome={totalIncome}
+          totalExpense={totalExpense}
+        />
 
         {/* <div className="flex justify-center gap-5">
         <button
