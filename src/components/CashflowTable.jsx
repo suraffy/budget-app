@@ -1,17 +1,16 @@
+import CashflowItem from "./CashflowItem";
+
 const CashflowTable = ({ items }) => {
   return (
-    <div className="flex justify-around">
-      <ul>
+    <div className="">
+      <div className="flex justify-around">
         <h4 className="text-lg font-bold">Reason</h4>
-        {items.map((item, index) => (
-          <li key={index}>{item.reason}</li>
-        ))}
-      </ul>
+        <h4 className="text-lg font-bold">Value</h4>
+      </div>
 
       <ul>
-        <h4 className="text-lg font-bold">Value</h4>
         {items.map((item, index) => (
-          <li key={index}>{item.amount}</li>
+          <CashflowItem key={index} item={item} />
         ))}
       </ul>
     </div>
