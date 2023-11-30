@@ -63,15 +63,22 @@ const Home = () => {
 
   const handleDeleteItem = (item) => {
     console.log(item, "deleted");
+    const amount = item.amount;
 
     if (item.cashflow === "income") {
       const incomeItemsUpdated = incomeItems.filter((exp) => exp !== item);
+
       setIncomeItems(incomeItemsUpdated);
+      setTotalIncome((prev) => prev - amount);
+      setAvailableBudget((prev) => prev - amount);
     }
 
     if (item.cashflow === "expense") {
       const expenseItemsUpdated = expenseItems.filter((exp) => exp !== item);
+
       setExpenseItems(expenseItemsUpdated);
+      setTotalExpense((prev) => prev - amount);
+      setAvailableBudget((prev) => prev + amount);
     }
   };
 
