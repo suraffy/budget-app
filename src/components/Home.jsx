@@ -86,9 +86,14 @@ const Home = () => {
             </button>
           </div>
 
-          <h4>Income</h4>
+          <h4>{currentCashflow}</h4>
           <Form onSubmit={handleSubmit} />
-          <CashflowTable incomeItems={incomeItems} />
+
+          {currentCashflow === "income" ? (
+            <CashflowTable items={incomeItems} />
+          ) : (
+            <CashflowTable items={expenseItems} />
+          )}
         </div>
       </div>
     </div>
