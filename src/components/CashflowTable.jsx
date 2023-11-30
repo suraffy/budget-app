@@ -3,9 +3,10 @@ import CashflowItem from "./CashflowItem";
 const CashflowTable = ({ items, onDelete }) => {
   return (
     <div className="">
-      <div className="flex justify-around">
+      <div className="flex justify-between">
         <h4 className="text-lg font-bold">Reason</h4>
         <h4 className="text-lg font-bold">Value</h4>
+        <h4></h4>
       </div>
 
       <ul>
