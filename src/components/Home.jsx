@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navbar from "./common/Navbar";
 import Budget from "./Budget";
 import Form from "./common/Form";
+import CashflowTable from "./CashflowTable";
 
 const Home = () => {
   const currency = "$";
@@ -12,7 +13,9 @@ const Home = () => {
   const [totalExpense, setTotalExpense] = useState(0);
 
   const [incomeItems, setIncomeItems] = useState([]);
-  const [expenseItems, setItems] = useState([]);
+  const [expenseItems, setExpenseItems] = useState([]);
+
+  const [currentCashflow, setCurrentCashflow] = useState("income");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,18 +29,33 @@ const Home = () => {
     const month = now.getMonth() + 1; // month starts with 0
     const year = now.getFullYear();
 
-    setTotalIncome((prev) => prev + amount);
-    setAvailableBudget((prev) => prev + amount);
-    setIncomeItems((prev) => [
-      ...prev,
-      {
-        year,
-        month,
-        date,
-        reason,
-        amount,
-      },
-    ]);
+    if (currentCashflow === "income") {
+      setTotalIncome((prev) => prev + amount);
+      setAvailableBudget((prev) => prev + amount);
+      setIncomeItems((prev) => [
+        ...prev,
+        {
+          year,
+          month,
+          date,
+          reason,
+          amount,
+        },
+      ]);
+    } else if (currentCashflow === "expense") {
+      setTotalExpense((prev) => prev + amount);
+      setAvailableBudget((prev) => prev - amount);
+      setExpenseItems((prev) => [
+        ...prev,
+        {
+          year,
+          month,
+          date,
+          reason,
+          amount,
+        },
+      ]);
+    }
   };
 
   return (
@@ -52,46 +70,25 @@ const Home = () => {
           totalExpense={totalExpense}
         />
 
-        {/* <div className="flex justify-center gap-5">
-        <button
-          onClick={() => {
-            setCashFlow("income");
-            setCashFlowItems("incomeItems");
-          }}
-          className="text-white bg-blue-600 py-2 px-4 rounded transition-colors hover:bg-blue-700 focus:ring-2 ring-offset-2 ring-blue-600"
-        >
-          Income
-        </button>
-        <button
-          onClick={() => {
-            setCashFlow("expense");
-            setCashFlowItems("expenseItems");
-          }}
-          className="text-white bg-red-600 py-2 px-4 rounded transition-colors hover:bg-red-700 focus:ring-2 ring-offset-2 ring-red-600"
-        >
-          Expense
-        </button>
-      </div> */}
-
         <div className="">
+          <div className="flex justify-center gap-5">
+            <button
+              onClick={() => setCurrentCashflow("income")}
+              className="text-white bg-blue-600 py-2 px-4 rounded transition-colors hover:bg-blue-700 focus:ring-2 ring-offset-2 ring-blue-600"
+            >
+              Income
+            </button>
+            <button
+              onClick={() => setCurrentCashflow("expense")}
+              className="text-white bg-red-600 py-2 px-4 rounded transition-colors hover:bg-red-700 focus:ring-2 ring-offset-2 ring-red-600"
+            >
+              Expense
+            </button>
+          </div>
+
           <h4>Income</h4>
           <Form onSubmit={handleSubmit} />
-
-          <div className="flex justify-around">
-            <ul>
-              <h4 className="text-lg font-bold">Reason</h4>
-              {incomeItems.map((item, index) => (
-                <li key={index}>{item.reason}</li>
-              ))}
-            </ul>
-
-            <ul>
-              <h4 className="text-lg font-bold">Value</h4>
-              {incomeItems.map((item, index) => (
-                <li key={index}>{item.amount}</li>
-              ))}
-            </ul>
-          </div>
+          <CashflowTable incomeItems={incomeItems} />
         </div>
       </div>
     </div>
