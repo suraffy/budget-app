@@ -1,6 +1,6 @@
 import CashflowItem from "./CashflowItem";
 
-const CashflowTable = ({ items }) => {
+const CashflowTable = ({ items, onDelete }) => {
   return (
     <div className="">
       <div className="flex justify-around">
@@ -10,7 +10,7 @@ const CashflowTable = ({ items }) => {
 
       <ul>
         {items.map((item, index) => (
-          <CashflowItem key={index} item={item} />
+          <CashflowItem key={index} item={item} onDelete={onDelete} />
         ))}
       </ul>
     </div>

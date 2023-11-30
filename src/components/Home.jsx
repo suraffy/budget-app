@@ -36,6 +36,7 @@ const Home = () => {
       setIncomeItems((prev) => [
         ...prev,
         {
+          cashflow: "income",
           year,
           month,
           date,
@@ -49,6 +50,7 @@ const Home = () => {
       setExpenseItems((prev) => [
         ...prev,
         {
+          cashflow: "expense",
           year,
           month,
           date,
@@ -56,6 +58,20 @@ const Home = () => {
           amount,
         },
       ]);
+    }
+  };
+
+  const handleDeleteItem = (item) => {
+    console.log(item, "deleted");
+
+    if (item.cashflow === "income") {
+      const incomeItemsUpdated = incomeItems.filter((exp) => exp !== item);
+      setIncomeItems(incomeItemsUpdated);
+    }
+
+    if (item.cashflow === "expense") {
+      const expenseItemsUpdated = expenseItems.filter((exp) => exp !== item);
+      setExpenseItems(expenseItemsUpdated);
     }
   };
 
@@ -89,9 +105,9 @@ const Home = () => {
           <Form onSubmit={handleSubmit} />
 
           {currentCashflow === "income" ? (
-            <CashflowTable items={incomeItems} />
+            <CashflowTable items={incomeItems} onDelete={handleDeleteItem} />
           ) : (
-            <CashflowTable items={expenseItems} />
+            <CashflowTable items={expenseItems} onDelete={handleDeleteItem} />
           )}
         </div>
       </div>
