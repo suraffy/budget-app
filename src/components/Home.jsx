@@ -14,12 +14,27 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const reason = e.target.reason.value;
-    const value = parseFloat(e.target.value.value);
+    const el = e.target;
+    const reason = el.reason.value;
+    const amount = parseFloat(el.value.value);
 
-    setTotalIncome((prev) => prev + value);
-    setAvailableBudget((prev) => prev + value);
-    setIncomeItems((prev) => [...prev, { reason, value }]);
+    const now = new Date();
+    const date = now.getDate();
+    const month = now.getMonth() + 1; // month starts with 0
+    const year = now.getFullYear();
+
+    setTotalIncome((prev) => prev + amount);
+    setAvailableBudget((prev) => prev + amount);
+    setIncomeItems((prev) => [
+      ...prev,
+      {
+        year,
+        month,
+        date,
+        reason,
+        amount,
+      },
+    ]);
   };
 
   return (
@@ -36,27 +51,50 @@ const Home = () => {
         </h2>
       </div>
 
-      <h4>Income</h4>
-      <form onSubmit={handleSubmit} className="">
-        <input type="text" name="reason" placeholder="reason" />
-        <input type="number" name="value" placeholder="value" min={0} />
-        <button type="submit">Add</button>
-      </form>
+      {/* <div className="flex justify-center gap-5">
+        <button
+          onClick={() => {
+            setCashFlow("income");
+            setCashFlowItems("incomeItems");
+          }}
+          className="text-white bg-blue-600 py-2 px-4 rounded transition-colors hover:bg-blue-700 focus:ring-2 ring-offset-2 ring-blue-600"
+        >
+          Income
+        </button>
+        <button
+          onClick={() => {
+            setCashFlow("expense");
+            setCashFlowItems("expenseItems");
+          }}
+          className="text-white bg-red-600 py-2 px-4 rounded transition-colors hover:bg-red-700 focus:ring-2 ring-offset-2 ring-red-600"
+        >
+          Expense
+        </button>
+      </div> */}
 
-      <div className="flex justify-around">
-        <ul>
-          <h4 className="text-lg font-bold">Reason</h4>
-          {incomeItems.map((item, index) => (
-            <li key={index}>{item.reason}</li>
-          ))}
-        </ul>
+      <div className="">
+        <h4>Income</h4>
+        <form onSubmit={handleSubmit} className="">
+          <input type="text" name="reason" placeholder="reason" />
+          <input type="number" name="value" placeholder="value" min={0} />
+          <button type="submit">Add</button>
+        </form>
 
-        <ul>
-          <h4 className="text-lg font-bold">Value</h4>
-          {incomeItems.map((item, index) => (
-            <li key={index}>{item.value}</li>
-          ))}
-        </ul>
+        <div className="flex justify-around">
+          <ul>
+            <h4 className="text-lg font-bold">Reason</h4>
+            {incomeItems.map((item, index) => (
+              <li key={index}>{item.reason}</li>
+            ))}
+          </ul>
+
+          <ul>
+            <h4 className="text-lg font-bold">Value</h4>
+            {incomeItems.map((item, index) => (
+              <li key={index}>{item.amount}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
