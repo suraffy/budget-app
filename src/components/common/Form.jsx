@@ -1,4 +1,4 @@
-const Form = ({ errors, onSubmit }) => {
+const Form = ({ errors, inputRef, onSubmit }) => {
   return (
     <form onSubmit={onSubmit} className="flex flex-wrap gap-2 mb-4 sm:ml-4">
       <div className="flex flex-col max-w-full">
@@ -7,6 +7,8 @@ const Form = ({ errors, onSubmit }) => {
           name="reason"
           placeholder="Reason"
           // required
+          autoFocus
+          ref={inputRef}
           autoComplete="off"
           className={` ${
             errors.reason ? "border border-red-500" : ""

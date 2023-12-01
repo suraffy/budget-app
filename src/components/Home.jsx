@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Navbar from "./common/Navbar";
 import Budget from "./Budget";
@@ -8,6 +8,7 @@ import CashflowTable from "./CashflowTable";
 
 const Home = () => {
   const currency = "$";
+  const inputRef = React.createRef();
 
   const [availableBudget, setAvailableBudget] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
@@ -93,6 +94,7 @@ const Home = () => {
     setErrors({});
     reasonEl.value = "";
     amountEl.value = "";
+    inputRef.current.focus();
   };
 
   const handleDeleteItem = (item) => {
@@ -148,7 +150,7 @@ const Home = () => {
             {currentCashflow}
           </h4>
 
-          <Form errors={errors} onSubmit={handleSubmit} />
+          <Form errors={errors} inputRef={inputRef} onSubmit={handleSubmit} />
 
           {currentCashflow === "income" ? (
             <CashflowTable
