@@ -98,7 +98,6 @@ const Home = () => {
   };
 
   const handleDeleteItem = (item) => {
-    console.log(item, "deleted");
     const amount = item.amount;
 
     if (item.cashflow === "income") {
