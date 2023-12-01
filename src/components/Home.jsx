@@ -9,6 +9,9 @@ import CashflowTable from "./CashflowTable";
 import PieChart from "./common/PieChart";
 import { incomeItemsList, expenseItemsList } from "../services/cashflowData";
 
+import IncomeSVG from "./common/IncomeSVG";
+import ExpenseSVG from "./common/ExpenseSVG";
+
 const Home = () => {
   const currency = "$";
   const inputRef = React.createRef();
@@ -171,8 +174,13 @@ const Home = () => {
         </div>
         <div className="flex flex-wrap-reverse justify-center md:justify-between">
           <div className="md:w-3/5">
-            <h4 className="font-semibold text-3xl capitalize ml-5 sm:ml-16 mt-6 mb-4">
-              {currentCashflow}
+            <h4 className="flex items-center gap-4 font-semibold text-3xl capitalize ml-5 sm:ml-16 mt-6 mb-4">
+              <span>{currentCashflow}</span>{" "}
+              {currentCashflow === "income" ? (
+                <IncomeSVG className="text-red" />
+              ) : (
+                <ExpenseSVG />
+              )}
             </h4>
 
             <Form errors={errors} inputRef={inputRef} onSubmit={handleSubmit} />
