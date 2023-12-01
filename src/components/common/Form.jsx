@@ -7,7 +7,10 @@ const Form = ({ errors, onSubmit }) => {
           name="reason"
           placeholder="Reason"
           // required
-          className=" py-1.5 px-2.5 mr-4 outline-none bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          autoComplete="off"
+          className={` ${
+            errors.reason ? "border border-red-500" : ""
+          } py-1.5 px-2.5 mr-4 outline-none bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500`}
         />
         <span className="text-sm text-red-600 ml-2">{errors.reason}</span>
       </div>
@@ -16,10 +19,12 @@ const Form = ({ errors, onSubmit }) => {
         <input
           type="number"
           name="amount"
-          min={0}
+          // min={0}
           placeholder="Amount in $"
           // required
-          className="py-1.5 px-2.5 outline-none bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          className={`  ${
+            errors.amount ? "border border-red-500" : ""
+          }  py-1.5 px-2.5 outline-none bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500`}
         />
         <span className="text-sm text-red-600 ml-2">{errors.amount}</span>
       </div>

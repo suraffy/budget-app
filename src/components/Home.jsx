@@ -23,10 +23,12 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const el = e.target;
+    const reasonEl = e.target.reason;
+    const amountEl = e.target.amount;
 
-    const reason = el.reason.value;
-    const amountStr = el.amount.value;
+    const reason = reasonEl.value;
+    const amountStr = amountEl.value;
+
     const amount = parseFloat(amountStr);
 
     if (!reason && !amount) {
@@ -48,7 +50,10 @@ const Home = () => {
       return;
     }
 
-    setErrors({});
+    if (amount < 0) {
+      setErrors({ amount: "Amount cannot be less than zero!" });
+      return;
+    }
 
     const now = new Date();
     const date = now.getDate();
@@ -84,6 +89,10 @@ const Home = () => {
         },
       ]);
     }
+
+    setErrors({});
+    reasonEl.value = "";
+    amountEl.value = "";
   };
 
   const handleDeleteItem = (item) => {
