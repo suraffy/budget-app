@@ -6,6 +6,8 @@ import Button from "./common/Button";
 import Form from "./common/Form";
 import CashflowTable from "./CashflowTable";
 
+import PieChart from "./common/PieChart";
+
 const Home = () => {
   const currency = "$";
   const inputRef = React.createRef();
@@ -15,11 +17,25 @@ const Home = () => {
   const [totalExpense, setTotalExpense] = useState(0);
 
   const [incomeItems, setIncomeItems] = useState([]);
+
   const [expenseItems, setExpenseItems] = useState([]);
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
 
   const [errors, setErrors] = useState({});
+
+  // const incomeData = {};
+
+  const abData = {};
+  abData.labels = incomeItems.map((item) => item.reason);
+  abData.datasets = [
+    {
+      label: "Amount",
+      data: incomeItems.map((item) => item.amount),
+      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors for each segment
+      borderWidth: 5,
+    },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,6 +111,27 @@ const Home = () => {
     reasonEl.value = "";
     amountEl.value = "";
     inputRef.current.focus();
+
+    abData.labels = incomeItems.map((item) => item.reason);
+    abData.datasets = [
+      {
+        label: "Amount",
+        data: incomeItems.map((item) => item.amount),
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors for each segment
+        borderWidth: 5,
+      },
+    ];
+
+    // incomeData.labels = incomeItems.map((item) => item.reason);
+    // incomeData.datasets = [
+    //   {
+    //     label: "Amount",
+    //     data: incomeItems.map((item) => item.amount),
+    //     borderWidth: 5,
+    //   },
+    // ];
+
+    // console.log("hiiii", incomeData);
   };
 
   const handleDeleteItem = (item) => {
@@ -164,6 +201,11 @@ const Home = () => {
               onDelete={handleDeleteItem}
             />
           )}
+        </div>
+
+        <div className="border border-red-600 p-5">
+          {console.log(incomeItems.length)}
+          {<PieChart data={abData} />}
         </div>
       </div>
     </div>

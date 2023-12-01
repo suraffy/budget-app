@@ -3,6 +3,7 @@ const Button = ({ label, color, currentCashflow, onBtnClick }) => {
     currentCashflow.toLowerCase() === label.toLowerCase()
       ? `text-white bg-${color}-600 border-transparent hover:bg-${color}-700 ring-2 ring-offset-2 ring-${color}-600`
       : `text-${color}-600 bg-transparent border-${color}-600 hover:bg-${color}-200`;
+
   return (
     <button
       onClick={onBtnClick}
