@@ -18,7 +18,7 @@ const Home = () => {
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
 
-  const [errors, setErrors] = useState({ reason: "hi", amount: "wow" });
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +47,8 @@ const Home = () => {
       setErrors({ amount: "Amount cannot be empty!" });
       return;
     }
+
+    setErrors({});
 
     const now = new Date();
     const date = now.getDate();
@@ -131,7 +133,7 @@ const Home = () => {
             />
           </div>
 
-          <h4 className="font-semibold text-3xl capitalize text-center mt-6 mb-4">
+          <h4 className="font-semibold text-3xl capitalize ml-5 sm:ml-16 mt-6 mb-4">
             {currentCashflow}
           </h4>
 
