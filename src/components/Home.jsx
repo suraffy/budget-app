@@ -133,11 +133,13 @@ const Home = () => {
             <Button
               label="Income"
               color="blue"
+              currentCashflow={currentCashflow}
               onBtnClick={() => setCurrentCashflow("income")}
             />
             <Button
               label="Expense"
               color="red"
+              currentCashflow={currentCashflow}
               onBtnClick={() => setCurrentCashflow("expense")}
             />
           </div>
