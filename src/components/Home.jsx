@@ -95,7 +95,7 @@ const Home = () => {
         />
 
         <div className="">
-          <div className="flex justify-center gap-5">
+          <div className="flex flex-wrap justify-center gap-5">
             <Button
               label="Income"
               color="blue"
