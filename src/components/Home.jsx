@@ -108,7 +108,10 @@ const Home = () => {
             />
           </div>
 
-          <h4>{currentCashflow}</h4>
+          <h4 className="font-semibold text-3xl capitalize text-center mt-6 mb-4">
+            {currentCashflow}
+          </h4>
+
           <Form onSubmit={handleSubmit} />
 
           {currentCashflow === "income" ? (
