@@ -115,9 +115,17 @@ const Home = () => {
           <Form onSubmit={handleSubmit} />
 
           {currentCashflow === "income" ? (
-            <CashflowTable items={incomeItems} onDelete={handleDeleteItem} />
+            <CashflowTable
+              items={incomeItems}
+              currency={currency}
+              onDelete={handleDeleteItem}
+            />
           ) : (
-            <CashflowTable items={expenseItems} onDelete={handleDeleteItem} />
+            <CashflowTable
+              items={expenseItems}
+              currency={currency}
+              onDelete={handleDeleteItem}
+            />
           )}
         </div>
       </div>
