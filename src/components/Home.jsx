@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Navbar from "./common/Navbar";
 import Budget from "./Budget";
@@ -43,8 +43,25 @@ const Home = () => {
       },
     ];
   };
-
   getChartData();
+
+  useEffect(() => {
+    const initialTotalIncome = incomeItems.reduce(
+      (acc, item) => acc + item.amount,
+      0
+    );
+
+    const initialTotalExpense = expenseItems.reduce(
+      (acc, item) => acc + item.amount,
+      0
+    );
+
+    const initialAvailableBudget = initialTotalIncome - initialTotalExpense;
+
+    setTotalIncome(initialTotalIncome);
+    setTotalExpense(initialTotalExpense);
+    setAvailableBudget(initialAvailableBudget);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
