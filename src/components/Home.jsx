@@ -7,6 +7,7 @@ import Form from "./common/Form";
 import CashflowTable from "./CashflowTable";
 
 import PieChart from "./common/PieChart";
+import { incomeItemsList, expenseItemsList } from "../services/cashflowData";
 
 const Home = () => {
   const currency = "$";
@@ -16,26 +17,35 @@ const Home = () => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
 
-  const [incomeItems, setIncomeItems] = useState([]);
-
-  const [expenseItems, setExpenseItems] = useState([]);
+  const [incomeItems, setIncomeItems] = useState(incomeItemsList);
+  const [expenseItems, setExpenseItems] = useState(expenseItemsList);
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
 
   const [errors, setErrors] = useState({});
 
-  // const incomeData = {};
+  console.log(incomeItems, expenseItems);
 
-  const abData = {};
-  abData.labels = incomeItems.map((item) => item.reason);
-  abData.datasets = [
-    {
-      label: "Amount",
-      data: incomeItems.map((item) => item.amount),
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors for each segment
-      borderWidth: 5,
-    },
-  ];
+  const chartData = {};
+
+  const getChartData = () => {
+    const cashflowItem =
+      currentCashflow === "income" ? incomeItems : expenseItems;
+
+    chartData.labels = cashflowItem.map((item) => item.reason);
+    chartData.datasets = [
+      {
+        label: "Amount",
+        data: cashflowItem.map((item) => item.amount),
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors for each segment
+        borderWidth: 5,
+      },
+    ];
+
+    console.log(chartData);
+  };
+
+  getChartData();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -112,26 +122,7 @@ const Home = () => {
     amountEl.value = "";
     inputRef.current.focus();
 
-    abData.labels = incomeItems.map((item) => item.reason);
-    abData.datasets = [
-      {
-        label: "Amount",
-        data: incomeItems.map((item) => item.amount),
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors for each segment
-        borderWidth: 5,
-      },
-    ];
-
-    // incomeData.labels = incomeItems.map((item) => item.reason);
-    // incomeData.datasets = [
-    //   {
-    //     label: "Amount",
-    //     data: incomeItems.map((item) => item.amount),
-    //     borderWidth: 5,
-    //   },
-    // ];
-
-    // console.log("hiiii", incomeData);
+    getChartData();
   };
 
   const handleDeleteItem = (item) => {
@@ -204,8 +195,7 @@ const Home = () => {
         </div>
 
         <div className="border border-red-600 p-5">
-          {console.log(incomeItems.length)}
-          {<PieChart data={abData} />}
+          {<PieChart data={chartData} />}
         </div>
       </div>
     </div>
