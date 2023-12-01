@@ -18,6 +18,8 @@ const Home = () => {
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
 
+  const [errors, setErrors] = useState({ reason: "hi", amount: "wow" });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -25,13 +27,26 @@ const Home = () => {
 
     const reason = el.reason.value;
     const amountStr = el.amount.value;
+    const amount = parseFloat(amountStr);
 
-    if (!reason || !amount) {
-      console.log("Empty field detected!");
+    if (!reason && !amount) {
+      setErrors({
+        reason: "Reason cannot be empty!",
+        amount: "Amount cannot be empty!",
+      });
+
       return;
     }
 
-    const amount = parseFloat(amountStr);
+    if (!reason) {
+      setErrors({ reason: "Reason cannot be empty!" });
+      return;
+    }
+
+    if (!amount) {
+      setErrors({ amount: "Amount cannot be empty!" });
+      return;
+    }
 
     const now = new Date();
     const date = now.getDate();
@@ -120,7 +135,7 @@ const Home = () => {
             {currentCashflow}
           </h4>
 
-          <Form onSubmit={handleSubmit} />
+          <Form errors={errors} onSubmit={handleSubmit} />
 
           {currentCashflow === "income" ? (
             <CashflowTable
