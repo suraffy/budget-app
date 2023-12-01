@@ -143,6 +143,8 @@ const Home = () => {
       setTotalExpense((prev) => prev - amount);
       setAvailableBudget((prev) => prev + amount);
     }
+
+    getChartData();
   };
 
   return (
