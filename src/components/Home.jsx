@@ -201,7 +201,7 @@ const Home = () => {
           </div>
 
           <div className="md:w-2/5">
-            <div className="lg:ml-16 mt-10">
+            <div className="mt-10 md:max-lg:mt-20 lg:ml-16 ">
               {<PieChart data={chartData} />}
             </div>
           </div>
