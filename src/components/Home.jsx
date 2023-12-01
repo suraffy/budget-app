@@ -24,8 +24,6 @@ const Home = () => {
 
   const [errors, setErrors] = useState({});
 
-  console.log(incomeItems, expenseItems);
-
   const chartData = {};
 
   const getChartData = () => {
@@ -41,8 +39,6 @@ const Home = () => {
         borderWidth: 5,
       },
     ];
-
-    console.log(chartData);
   };
 
   getChartData();
@@ -159,45 +155,48 @@ const Home = () => {
           totalExpense={totalExpense}
         />
 
-        <div className="">
-          <div className="flex flex-wrap justify-center gap-5">
-            <Button
-              label="Income"
-              color="blue"
-              currentCashflow={currentCashflow}
-              onBtnClick={() => setCurrentCashflow("income")}
-            />
-            <Button
-              label="Expense"
-              color="red"
-              currentCashflow={currentCashflow}
-              onBtnClick={() => setCurrentCashflow("expense")}
-            />
+        <div className="flex flex-wrap justify-center gap-5">
+          <Button
+            label="Income"
+            color="blue"
+            currentCashflow={currentCashflow}
+            onBtnClick={() => setCurrentCashflow("income")}
+          />
+          <Button
+            label="Expense"
+            color="red"
+            currentCashflow={currentCashflow}
+            onBtnClick={() => setCurrentCashflow("expense")}
+          />
+        </div>
+        <div className="flex flex-wrap-reverse justify-center md:justify-between">
+          <div className="md:w-3/5">
+            <h4 className="font-semibold text-3xl capitalize ml-5 sm:ml-16 mt-6 mb-4">
+              {currentCashflow}
+            </h4>
+
+            <Form errors={errors} inputRef={inputRef} onSubmit={handleSubmit} />
+
+            {currentCashflow === "income" ? (
+              <CashflowTable
+                items={incomeItems}
+                currency={currency}
+                onDelete={handleDeleteItem}
+              />
+            ) : (
+              <CashflowTable
+                items={expenseItems}
+                currency={currency}
+                onDelete={handleDeleteItem}
+              />
+            )}
           </div>
 
-          <h4 className="font-semibold text-3xl capitalize ml-5 sm:ml-16 mt-6 mb-4">
-            {currentCashflow}
-          </h4>
-
-          <Form errors={errors} inputRef={inputRef} onSubmit={handleSubmit} />
-
-          {currentCashflow === "income" ? (
-            <CashflowTable
-              items={incomeItems}
-              currency={currency}
-              onDelete={handleDeleteItem}
-            />
-          ) : (
-            <CashflowTable
-              items={expenseItems}
-              currency={currency}
-              onDelete={handleDeleteItem}
-            />
-          )}
-        </div>
-
-        <div className="border border-red-600 p-5">
-          {<PieChart data={chartData} />}
+          <div className="md:w-2/5">
+            <div className="lg:ml-16 mt-10">
+              {<PieChart data={chartData} />}
+            </div>
+          </div>
         </div>
       </div>
     </div>
