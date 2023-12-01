@@ -10,7 +10,7 @@ const Form = ({ onSubmit }) => {
       />
       <input
         type="number"
-        name="value"
+        name="amount"
         min={0}
         placeholder="Amount in $"
         required

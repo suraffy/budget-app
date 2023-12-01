@@ -22,8 +22,16 @@ const Home = () => {
     e.preventDefault();
 
     const el = e.target;
+
     const reason = el.reason.value;
-    const amount = parseFloat(el.value.value);
+    const amountStr = el.amount.value;
+
+    if (!reason || !amount) {
+      console.log("Empty field detected!");
+      return;
+    }
+
+    const amount = parseFloat(amountStr);
 
     const now = new Date();
     const date = now.getDate();
