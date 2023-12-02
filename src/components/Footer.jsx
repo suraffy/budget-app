@@ -102,7 +102,7 @@ const Footer = () => {
                 through dynamic charts and graphs.
               </p>
             </div>
-            <div className="">
+            <div className="ml-4">
               <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
                 Products
               </h6>
@@ -164,7 +164,7 @@ const Footer = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                + 251 967 5323 29
+                +251 967 5323 29
               </p>
               <p className="flex items-center justify-center md:justify-start">
                 <svg
@@ -179,7 +179,7 @@ const Footer = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                + 251 967 5323 29
+                +251 967 5323 29
               </p>
             </div>
           </div>
