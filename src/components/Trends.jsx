@@ -1,16 +1,21 @@
-import { incomeItemsList, expenseItemsList } from "../services/cashflowData";
+import MissingDataSVG from "../img/noun-missing-data-3377935.svg";
 
 const Trends = () => {
   return (
-    <div className="mb-32">
+    <section id="trends" className=" container mb-32">
       <h2 className="text-4xl font-semibold text-center">
         Annual Cashflow Trends
       </h2>
 
       <div className="my-10 text-center">
-        <p className="text-lg">There is no enought data is available!</p>
+        <img
+          src={MissingDataSVG}
+          alt="Missing Data"
+          className="h-20 block mx-auto mt-16"
+        />
+        <p className="text-lg">No enough data available!!</p>
       </div>
-    </div>
+    </section>
   );
 };
 
