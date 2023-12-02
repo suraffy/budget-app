@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BarChart from "../img/wired-outline-153-bar-chart.webp";
 
 const Footer = () => {
@@ -8,6 +8,24 @@ const Footer = () => {
   const githubAccountUrl = "https://github.com/suraffy";
 
   const [emailLabel, setEmailLabel] = useState("Email address");
+  const [subscribedEmails, setSubscribedEmails] = useState([]);
+
+  useEffect(() => {
+    const emailsStr = localStorage.getItem("subscribedEmails");
+    if (emailsStr && emailsStr.length > 0) {
+      const emails = JSON.parse(emailsStr);
+      setSubscribedEmails(emails);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (subscribedEmails.length > 0) {
+      localStorage.setItem(
+        "subscribedEmails",
+        JSON.stringify(subscribedEmails)
+      );
+    }
+  }, [subscribedEmails]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -15,13 +33,36 @@ const Footer = () => {
     const emailEl = e.target.email;
 
     if (emailEl.checkValidity()) {
+      const newEmail = emailEl.value;
+
+      if (subscribedEmails.length > 0) {
+        const duplicateEmail = subscribedEmails.find(
+          (email) => email === newEmail
+        );
+
+        if (duplicateEmail) {
+          setEmailLabel("Already subscribed!");
+          emailEl.value = "";
+
+          setTimeout(() => {
+            setEmailLabel("Email address");
+          }, 3000);
+
+          return;
+        }
+
+        setSubscribedEmails((prev) => [...prev, newEmail]);
+      } else {
+        setSubscribedEmails([newEmail]);
+      }
+
       setEmailLabel("Subscribed!");
       emailEl.value = "";
     }
 
     setTimeout(() => {
       setEmailLabel("Email address");
-    }, 1500);
+    }, 2000);
   };
 
   return (
