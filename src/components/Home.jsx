@@ -25,7 +25,7 @@ const Home = () => {
   const [expenseItems, setExpenseItems] = useState([]);
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
-
+  const [username, setUsername] = useState("Try it");
   const [errors, setErrors] = useState({});
 
   const chartData = {};
@@ -74,6 +74,11 @@ const Home = () => {
     // SetState
     setIncomeItems(initialIncomeItems);
     setExpenseItems(initialExpenseItems);
+  }, []);
+
+  useEffect(() => {
+    initialIncomeItems = incomeItems || initialIncomeItems;
+    initialExpenseItems = expenseItems || initialExpenseItems;
 
     // InitialTotalIncome
     const initialTotalIncome = initialIncomeItems.reduce(
@@ -91,7 +96,17 @@ const Home = () => {
     setTotalIncome(initialTotalIncome);
     setTotalExpense(initialTotalExpense);
     setAvailableBudget(initialAvailableBudget);
-  }, []);
+  }, [incomeItems, expenseItems]);
+
+  const handleTryIt = () => {
+    console.log("Try it");
+    initialIncomeItems = [];
+    initialExpenseItems = [];
+
+    setIncomeItems([]);
+    setExpenseItems([]);
+    setCurrentCashflow("income");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -195,7 +210,7 @@ const Home = () => {
 
   return (
     <section id="dashboard" className="mb-32">
-      <Navbar />
+      <Navbar username={username} onTryIt={handleTryIt} />
 
       <div className="container">
         <Budget

@@ -1,6 +1,10 @@
 import BarChart from "../../img/wired-outline-153-bar-chart.webp";
 
-const Navbar = () => {
+const Navbar = ({ username, onTryIt }) => {
+  if (username && username.length > 9) {
+    username = username.slice(0, 10);
+  }
+
   return (
     <header className="shadow">
       <nav className="container h-14 flex justify-between leading-3 font-semibold">
@@ -11,7 +15,6 @@ const Navbar = () => {
             <span>App</span>
           </span>
         </div>
-        {/* <a href="" className="text-purple-900 flex items-center"> */}
 
         <div className="flex">
           <ul className="hidden sm:flex">
@@ -42,12 +45,12 @@ const Navbar = () => {
           </ul>
 
           <div className="flex items-center">
-            <a
-              href=""
+            <button
+              onClick={onTryIt}
               className="bg-indigo-600 text-white py-2 px-3 transition-colors  hover:bg-indigo-700 rounded  ring-offset-1 focus:ring-1 focus:ring-indigo-700"
             >
-              Try it
-            </a>
+              {username}
+            </button>
           </div>
 
           <div className="sm:hidden flex items-center ml-4">
