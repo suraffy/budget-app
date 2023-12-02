@@ -1,10 +1,17 @@
+import BarChart from "../../img/wired-outline-153-bar-chart.webp";
+
 const Navbar = () => {
   return (
     <header className="shadow">
       <nav className="container h-14 flex justify-between leading-3 font-semibold">
-        <a href="" className="text-purple-900 flex items-center">
-          Logo
-        </a>
+        <div className="flex items-end cursor-pointer">
+          <img src={BarChart} alt="BarChart Logo" className="h-full" />
+          <span className="flex flex-col items-center justify-center text-sm mb-2 leading-none text-purple-900 ">
+            <span>Budget</span>
+            <span>App</span>
+          </span>
+        </div>
+        {/* <a href="" className="text-purple-900 flex items-center"> */}
 
         <div className="flex">
           <ul className="hidden sm:flex">
