@@ -10,7 +10,7 @@ import {
 import { incomeItemsList, expenseItemsList } from "../services/cashflowData";
 
 const Insight = () => {
-  const [currentCashflow, setCurrentCashflow] = useState("expense");
+  const [currentCashflow, setCurrentCashflow] = useState("income");
 
   const chartData = {};
 
