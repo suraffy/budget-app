@@ -164,7 +164,7 @@ const Home = () => {
   };
 
   return (
-    <div className="">
+    <div className="mb-32">
       <Navbar />
 
       <div className="container">
