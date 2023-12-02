@@ -13,7 +13,7 @@ const Trends = () => {
           alt="Missing Data"
           className="h-20 block mx-auto mt-16"
         />
-        <p className="text-lg">No enough data available!!</p>
+        <p className="text-lg">No sufficient data available!!</p>
       </div>
     </section>
   );
