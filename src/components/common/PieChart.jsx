@@ -2,6 +2,8 @@ import { Chartjs } from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 
 const PieChart = ({ data }) => {
+  if (!data || Object.entries(data).length === 0) return;
+
   const newData = { ...data };
   newData.datasets[0].backgroundColor = [
     "#FF6384",
