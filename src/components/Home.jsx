@@ -21,8 +21,8 @@ const Home = () => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
 
-  const [incomeItems, setIncomeItems] = useState(incomeItemsList);
-  const [expenseItems, setExpenseItems] = useState(expenseItemsList);
+  const [incomeItems, setIncomeItems] = useState([]);
+  const [expenseItems, setExpenseItems] = useState([]);
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
 
@@ -30,9 +30,15 @@ const Home = () => {
 
   const chartData = {};
 
+  let initialIncomeItems = [];
+  let initialExpenseItems = [];
+
+  // Set Chart Data
   const getChartData = () => {
     const cashflowItem =
-      currentCashflow === "income" ? incomeItems : expenseItems;
+      currentCashflow === "income"
+        ? incomeItems || initialIncomeItems
+        : expenseItems || initialExpenseItems;
 
     chartData.labels = cashflowItem.map((item) => item.reason);
     chartData.datasets = [
@@ -44,15 +50,38 @@ const Home = () => {
       },
     ];
   };
+
   getChartData();
 
   useEffect(() => {
-    const initialTotalIncome = incomeItems.reduce(
+    const incomeItemsStr = localStorage.getItem("incomeItemsStr");
+    const expenseItemsStr = localStorage.getItem("expenseItemsStr");
+
+    if (incomeItemsStr && incomeItems.length > 0) {
+      const incomeItemsObj = JSON.parse(incomeItemsStr);
+      initialIncomeItems = incomeItemsObj;
+    } else {
+      initialIncomeItems = incomeItemsList;
+    }
+
+    if (expenseItemsStr && expenseItems.length > 0) {
+      const expenseItemsObj = JSON.parse(expenseItemsStr);
+      initialExpenseItems = expenseItemsObj;
+    } else {
+      initialExpenseItems = expenseItemsList;
+    }
+
+    // SetState
+    setIncomeItems(initialIncomeItems);
+    setExpenseItems(initialExpenseItems);
+
+    // InitialTotalIncome
+    const initialTotalIncome = initialIncomeItems.reduce(
       (acc, item) => acc + item.amount,
       0
     );
 
-    const initialTotalExpense = expenseItems.reduce(
+    const initialTotalExpense = initialExpenseItems.reduce(
       (acc, item) => acc + item.amount,
       0
     );
