@@ -14,7 +14,8 @@ import ExpenseSVG from "./common/ExpenseSVG";
 
 const Home = () => {
   const currency = "$";
-  const inputRef = React.createRef();
+
+  const inputReasonRef = React.createRef();
 
   const [availableBudget, setAvailableBudget] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
@@ -136,7 +137,7 @@ const Home = () => {
     setErrors({});
     reasonEl.value = "";
     amountEl.value = "";
-    inputRef.current.focus();
+    inputReasonRef.current.focus();
 
     getChartData();
   };
@@ -200,7 +201,11 @@ const Home = () => {
               )}
             </h4>
 
-            <Form errors={errors} inputRef={inputRef} onSubmit={handleSubmit} />
+            <Form
+              errors={errors}
+              inputReasonRef={inputReasonRef}
+              onSubmit={handleSubmit}
+            />
 
             {currentCashflow === "income" ? (
               <CashflowTable
