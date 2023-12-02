@@ -52,3 +52,5 @@ const plannedExpenseList = [
     amount: 60,
   },
 ];
+
+export { plannedIncomeList, plannedExpenseList };
