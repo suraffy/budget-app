@@ -1,6 +1,8 @@
 import CashflowItem from "./CashflowItem";
 
 const CashflowTable = ({ items, currency, onDelete }) => {
+  if (!items.length) return;
+
   return (
     <div className="my-8 p-4 pb-6 shadow-lg border border-slate-300 rounded-lg">
       <div className="flex justify-between flex-wrap mb-2">
