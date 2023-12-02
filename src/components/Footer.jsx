@@ -25,7 +25,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-slate-100 text-center dark:bg-slate-600">
+    <footer id="footer" className="bg-slate-100 text-center dark:bg-slate-600">
       <div className="container bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
         <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
           <div className="mr-12 hidden lg:block">
@@ -107,17 +107,26 @@ const Footer = () => {
                 Products
               </h6>
               <p className="mb-4">
-                <a href="#!" className="text-neutral-600 dark:text-neutral-200">
+                <a
+                  href="#dashboard"
+                  className="text-neutral-600 dark:text-neutral-200"
+                >
                   Dashboard
                 </a>
               </p>
               <p className="mb-4">
-                <a href="#!" className="text-neutral-600 dark:text-neutral-200">
+                <a
+                  href="#insights"
+                  className="text-neutral-600 dark:text-neutral-200"
+                >
                   Insights
                 </a>
               </p>
               <p className="mb-4">
-                <a href="#!" className="text-neutral-600 dark:text-neutral-200">
+                <a
+                  href="trends"
+                  className="text-neutral-600 dark:text-neutral-200"
+                >
                   Trends
                 </a>
               </p>

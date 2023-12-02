@@ -17,7 +17,7 @@ const Navbar = () => {
           <ul className="hidden sm:flex">
             <li className="flex">
               <a
-                href=""
+                href="#dashboard"
                 className="flex items-center text-gray-800 px-3 transition-colors hover:text-indigo-600 hover:bg-gray-100"
               >
                 Dashboard
@@ -25,7 +25,7 @@ const Navbar = () => {
             </li>
             <li className="flex">
               <a
-                href=""
+                href="#insights"
                 className="flex items-center text-gray-800 px-3 transition-colors hover:text-indigo-600 hover:bg-gray-100"
               >
                 Insights
@@ -33,7 +33,7 @@ const Navbar = () => {
             </li>
             <li className="flex">
               <a
-                href=""
+                href="#trends"
                 className="flex items-center text-gray-800 px-3 transition-colors hover:text-indigo-600 hover:bg-gray-100"
               >
                 Trends
