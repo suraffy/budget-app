@@ -1,5 +1,17 @@
+import Home from "./components/Home";
+import Insight from "./components/Insight";
+import Trends from "./components/Trends";
+import Footer from "./components/Footer";
+
 function App() {
-  return <h1 className="font-light">Budge App</h1>;
+  return (
+    <div>
+      <Home />
+      <Insight />
+      <Trends />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
