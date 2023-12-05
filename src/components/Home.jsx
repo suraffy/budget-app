@@ -24,7 +24,7 @@ const Home = () => {
   const [expenseItems, setExpenseItems] = useState([]);
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
-  const [username, setUsername] = useState("Try it");
+  const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -56,20 +56,18 @@ const Home = () => {
   getChartData();
 
   useEffect(() => {
-    const incomeItemsStr = localStorage.getItem("incomeItemsStr");
-    const expenseItemsStr = localStorage.getItem("expenseItemsStr");
+    const budgetAppDataStr = localStorage.getItem("budgetAppData");
+    const budgetAppData = budgetAppDataStr
+      ? JSON.parse(budgetAppDataStr)
+      : undefined;
 
-    if (incomeItemsStr && incomeItems.length > 0) {
-      const incomeItemsObj = JSON.parse(incomeItemsStr);
-      initialIncomeItems = incomeItemsObj;
+    if (budgetAppData?.username) {
+      setUsername(budgetAppData.username);
+      initialIncomeItems = budgetAppData.incomeItems;
+      initialExpenseItems = budgetAppData.expenseItems;
     } else {
+      setUsername("Try it");
       initialIncomeItems = incomeItemsList;
-    }
-
-    if (expenseItemsStr && expenseItems.length > 0) {
-      const expenseItemsObj = JSON.parse(expenseItemsStr);
-      initialExpenseItems = expenseItemsObj;
-    } else {
       initialExpenseItems = expenseItemsList;
     }
 
@@ -107,8 +105,28 @@ const Home = () => {
   const handleCloseTryItModal = () => setShowTryItModal(false);
 
   const handleTryIt = (username) => {
-    console.log("Try it");
+    if (!username) {
+      username = "Try It";
+      setUsername(username);
+
+      setIncomeItems(incomeItemsList);
+      setExpenseItems(expenseItemsList);
+      setCurrentCashflow("income");
+
+      handleCloseTryItModal();
+
+      return;
+    }
+
     setUsername(username);
+    localStorage.setItem(
+      "budgetAppData",
+      JSON.stringify({
+        username,
+        incomeItems: [],
+        expenseItems: [],
+      })
+    );
 
     initialIncomeItems = [];
     initialExpenseItems = [];
@@ -157,37 +175,57 @@ const Home = () => {
 
     const now = new Date();
     const date = now.getDate();
-    const month = now.getMonth() + 1; // month starts with 0
+    const month = now.getMonth() + 1; // month starts at 0
     const year = now.getFullYear();
 
     if (currentCashflow === "income") {
       setTotalIncome((prev) => prev + amount);
       setAvailableBudget((prev) => prev + amount);
-      setIncomeItems((prev) => [
-        ...prev,
-        {
-          cashflow: "income",
-          year,
-          month,
-          date,
-          reason,
-          amount,
-        },
-      ]);
+
+      const prevIncomeItems = [...incomeItems];
+      const currentIncomeItem = {
+        cashflow: "income",
+        year,
+        month,
+        date,
+        reason,
+        amount,
+      };
+
+      setIncomeItems((prev) => [...prev, currentIncomeItem]);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: [...prevIncomeItems, currentIncomeItem],
+          expenseItems: [...expenseItems],
+        })
+      );
     } else if (currentCashflow === "expense") {
       setTotalExpense((prev) => prev + amount);
       setAvailableBudget((prev) => prev - amount);
-      setExpenseItems((prev) => [
-        ...prev,
-        {
-          cashflow: "expense",
-          year,
-          month,
-          date,
-          reason,
-          amount,
-        },
-      ]);
+
+      const prevExpenseItems = [...expenseItems];
+      const currentExpenseItems = {
+        cashflow: "expense",
+        year,
+        month,
+        date,
+        reason,
+        amount,
+      };
+
+      setExpenseItems((prev) => [...prev, currentExpenseItems]);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: [...incomeItems],
+          expenseItems: [...expenseItems, currentExpenseItems],
+        })
+      );
     }
 
     setErrors({});

@@ -56,7 +56,7 @@ const Navbar = ({
               onClick={onShowModal}
               className="bg-indigo-600 text-white py-2 px-3 transition-colors  hover:bg-indigo-700 rounded  ring-offset-1 focus:ring-1 focus:ring-indigo-700"
             >
-              {username[0].toUpperCase() + username.slice(1)}
+              {username && username[0].toUpperCase() + username.slice(1)}
             </button>
 
             <TryItConfirmationModal
