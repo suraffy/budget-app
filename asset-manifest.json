@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/budget-app/static/css/main.84f97a85.css",
-    "main.js": "/budget-app/static/js/main.6d7e1524.js",
-    "static/media/wired-outline-153-bar-chart.webp": "/budget-app/static/media/wired-outline-153-bar-chart.2baf8a1870a78644f945.webp",
+    "main.css": "/budget-app/static/css/main.5cb3be7e.css",
+    "main.js": "/budget-app/static/js/main.c9bf3637.js",
+    "static/media/wired-outline-153-bar-chart.webp": "/budget-app/static/media/wired-outline-153-bar-chart.70a21209b92c2853cad8.webp",
     "static/media/noun-missing-data-3377935.svg": "/budget-app/static/media/noun-missing-data-3377935.5f7a652f105fdd271ba8d668eec5d540.svg",
     "index.html": "/budget-app/index.html",
-    "main.84f97a85.css.map": "/budget-app/static/css/main.84f97a85.css.map",
-    "main.6d7e1524.js.map": "/budget-app/static/js/main.6d7e1524.js.map"
+    "main.5cb3be7e.css.map": "/budget-app/static/css/main.5cb3be7e.css.map",
+    "main.c9bf3637.js.map": "/budget-app/static/js/main.c9bf3637.js.map"
   },
   "entrypoints": [
-    "static/css/main.84f97a85.css",
-    "static/js/main.6d7e1524.js"
+    "static/css/main.5cb3be7e.css",
+    "static/js/main.c9bf3637.js"
   ]
 }
