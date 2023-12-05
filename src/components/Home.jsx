@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DeleteConfirmationModal from "./common/DeleteComfirmationModal";
 
 import Navbar from "./common/Navbar";
 import Budget from "./Budget";
@@ -28,7 +27,8 @@ const Home = () => {
   const [username, setUsername] = useState("Try it");
   const [errors, setErrors] = useState({});
 
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showTryItModal, setShowTryItModal] = useState(false);
 
   const chartData = {};
 
@@ -100,14 +100,24 @@ const Home = () => {
     setAvailableBudget(initialAvailableBudget);
   }, [incomeItems, expenseItems]);
 
-  const handleTryIt = () => {
+  const handleShowDeleteModal = () => setShowDeleteModal(true);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+
+  const handleShowTryItModal = () => setShowTryItModal(true);
+  const handleCloseTryItModal = () => setShowTryItModal(false);
+
+  const handleTryIt = (username) => {
     console.log("Try it");
+    setUsername(username);
+
     initialIncomeItems = [];
     initialExpenseItems = [];
 
     setIncomeItems([]);
     setExpenseItems([]);
     setCurrentCashflow("income");
+
+    handleCloseTryItModal();
   };
 
   const handleSubmit = (e) => {
@@ -188,9 +198,6 @@ const Home = () => {
     getChartData();
   };
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
   const handleDeleteItem = (item) => {
     const amount = item.amount;
 
@@ -211,12 +218,18 @@ const Home = () => {
     }
 
     getChartData();
-    handleCloseModal();
+    handleCloseDeleteModal();
   };
 
   return (
     <section id="dashboard" className="mb-32">
-      <Navbar username={username} onTryIt={handleTryIt} />
+      <Navbar
+        username={username}
+        showModal={showTryItModal}
+        onShowModal={handleShowTryItModal}
+        onCloseModal={handleCloseTryItModal}
+        onTryIt={handleTryIt}
+      />
 
       <div className="container">
         <Budget
@@ -261,18 +274,18 @@ const Home = () => {
               <CashflowTable
                 items={incomeItems}
                 currency={currency}
-                showModal={showModal}
-                onShowModal={handleShowModal}
-                onCloseModal={handleCloseModal}
+                showModal={showDeleteModal}
+                onShowModal={handleShowDeleteModal}
+                onCloseModal={handleCloseDeleteModal}
                 onDelete={handleDeleteItem}
               />
             ) : (
               <CashflowTable
                 items={expenseItems}
                 currency={currency}
-                showModal={showModal}
-                onShowModal={handleShowModal}
-                onCloseModal={handleCloseModal}
+                showModal={showDeleteModal}
+                onShowModal={handleShowDeleteModal}
+                onCloseModal={handleCloseDeleteModal}
                 onDelete={handleDeleteItem}
               />
             )}

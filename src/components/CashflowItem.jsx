@@ -4,8 +4,8 @@ const CashflowItem = ({
   item,
   currency,
   showModal,
-  onCloseModal,
   onShowModal,
+  onCloseModal,
   onDelete,
 }) => {
   return (
