@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DeleteConfirmationModal from "./common/DeleteComfirmationModal";
 
 import Navbar from "./common/Navbar";
 import Budget from "./Budget";
@@ -14,7 +15,6 @@ import ExpenseSVG from "./common/ExpenseSVG";
 
 const Home = () => {
   const currency = "$";
-
   const inputReasonRef = React.createRef();
 
   const [availableBudget, setAvailableBudget] = useState(0);
@@ -27,6 +27,8 @@ const Home = () => {
   const [currentCashflow, setCurrentCashflow] = useState("income");
   const [username, setUsername] = useState("Try it");
   const [errors, setErrors] = useState({});
+
+  const [showModal, setShowModal] = useState(false);
 
   const chartData = {};
 
@@ -186,6 +188,9 @@ const Home = () => {
     getChartData();
   };
 
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
   const handleDeleteItem = (item) => {
     const amount = item.amount;
 
@@ -206,6 +211,7 @@ const Home = () => {
     }
 
     getChartData();
+    handleCloseModal();
   };
 
   return (
@@ -255,12 +261,18 @@ const Home = () => {
               <CashflowTable
                 items={incomeItems}
                 currency={currency}
+                showModal={showModal}
+                onShowModal={handleShowModal}
+                onCloseModal={handleCloseModal}
                 onDelete={handleDeleteItem}
               />
             ) : (
               <CashflowTable
                 items={expenseItems}
                 currency={currency}
+                showModal={showModal}
+                onShowModal={handleShowModal}
+                onCloseModal={handleCloseModal}
                 onDelete={handleDeleteItem}
               />
             )}
