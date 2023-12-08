@@ -245,6 +245,15 @@ const Home = () => {
       setIncomeItems(incomeItemsUpdated);
       setTotalIncome((prev) => prev - amount);
       setAvailableBudget((prev) => prev - amount);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: incomeItemsUpdated,
+          expenseItems: expenseItems,
+        })
+      );
     }
 
     if (item.cashflow === "expense") {
@@ -253,6 +262,15 @@ const Home = () => {
       setExpenseItems(expenseItemsUpdated);
       setTotalExpense((prev) => prev - amount);
       setAvailableBudget((prev) => prev + amount);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: incomeItems,
+          expenseItems: expenseItemsUpdated,
+        })
+      );
     }
 
     getChartData();
@@ -260,7 +278,7 @@ const Home = () => {
   };
 
   return (
-    <section id="dashboard" className="mb-32">
+    <section id="dashboard" className="mb-56">
       <Navbar
         username={username}
         showModal={showTryItModal}
@@ -329,11 +347,13 @@ const Home = () => {
             )}
           </div>
 
-          <div className="md:w-2/5">
-            <div className="mt-10 md:max-lg:mt-20 lg:ml-16 ">
-              {<PieChart data={chartData} />}
+          {chartData.labels.length > 0 && (
+            <div className="md:w-2/5">
+              <div className="mt-10 md:max-lg:mt-20 lg:ml-16 ">
+                {<PieChart data={chartData} />}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
