@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/budget-app/static/css/main.5cb3be7e.css",
-    "main.js": "/budget-app/static/js/main.c9bf3637.js",
+    "main.css": "/budget-app/static/css/main.141dded8.css",
+    "main.js": "/budget-app/static/js/main.9f48debb.js",
     "static/media/wired-outline-153-bar-chart.webp": "/budget-app/static/media/wired-outline-153-bar-chart.70a21209b92c2853cad8.webp",
     "static/media/noun-missing-data-3377935.svg": "/budget-app/static/media/noun-missing-data-3377935.5f7a652f105fdd271ba8d668eec5d540.svg",
     "index.html": "/budget-app/index.html",
-    "main.5cb3be7e.css.map": "/budget-app/static/css/main.5cb3be7e.css.map",
-    "main.c9bf3637.js.map": "/budget-app/static/js/main.c9bf3637.js.map"
+    "main.141dded8.css.map": "/budget-app/static/css/main.141dded8.css.map",
+    "main.9f48debb.js.map": "/budget-app/static/js/main.9f48debb.js.map"
   },
   "entrypoints": [
-    "static/css/main.5cb3be7e.css",
-    "static/js/main.c9bf3637.js"
+    "static/css/main.141dded8.css",
+    "static/js/main.9f48debb.js"
   ]
 }
