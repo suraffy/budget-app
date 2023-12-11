@@ -40,7 +40,7 @@ const Insight = () => {
   getChartData();
 
   return (
-    <section id="insights" className="container mb-32">
+    <section id="insights" className="container mb-56">
       <h2 className="text-4xl font-semibold text-center">
         Previous Month Insights
       </h2>

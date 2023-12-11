@@ -1,6 +1,13 @@
 import BarChart from "../../img/wired-outline-153-bar-chart.webp";
+import TryItConfirmationModal from "./TryItConfirmationModal";
 
-const Navbar = ({ username, onTryIt }) => {
+const Navbar = ({
+  username,
+  showModal,
+  onShowModal,
+  onCloseModal,
+  onTryIt,
+}) => {
   if (username && username.length > 9) {
     username = username.slice(0, 10);
   }
@@ -46,11 +53,17 @@ const Navbar = ({ username, onTryIt }) => {
 
           <div className="flex items-center">
             <button
-              onClick={onTryIt}
+              onClick={onShowModal}
               className="bg-indigo-600 text-white py-2 px-3 transition-colors  hover:bg-indigo-700 rounded  ring-offset-1 focus:ring-1 focus:ring-indigo-700"
             >
-              {username}
+              {username && username[0].toUpperCase() + username.slice(1)}
             </button>
+
+            <TryItConfirmationModal
+              showModal={showModal}
+              onCloseModal={onCloseModal}
+              onTryIt={onTryIt}
+            />
           </div>
 
           <div className="sm:hidden flex items-center ml-4">

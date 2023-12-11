@@ -2,7 +2,7 @@ import MissingDataSVG from "../img/noun-missing-data-3377935.svg";
 
 const Trends = () => {
   return (
-    <section id="trends" className=" container mb-32">
+    <section id="trends" className=" container mb-56">
       <h2 className="text-4xl font-semibold text-center">
         Annual Cashflow Trends
       </h2>

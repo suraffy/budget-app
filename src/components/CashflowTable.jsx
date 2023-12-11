@@ -1,6 +1,13 @@
 import CashflowItem from "./CashflowItem";
 
-const CashflowTable = ({ items, currency, onDelete }) => {
+const CashflowTable = ({
+  items,
+  currency,
+  showModal,
+  onShowModal,
+  onCloseModal,
+  onDelete,
+}) => {
   if (!items.length) return;
 
   return (
@@ -17,6 +24,9 @@ const CashflowTable = ({ items, currency, onDelete }) => {
             key={index}
             item={item}
             currency={currency}
+            showModal={showModal}
+            onShowModal={onShowModal}
+            onCloseModal={onCloseModal}
             onDelete={onDelete}
           />
         ))}

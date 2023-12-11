@@ -14,7 +14,6 @@ import ExpenseSVG from "./common/ExpenseSVG";
 
 const Home = () => {
   const currency = "$";
-
   const inputReasonRef = React.createRef();
 
   const [availableBudget, setAvailableBudget] = useState(0);
@@ -25,8 +24,11 @@ const Home = () => {
   const [expenseItems, setExpenseItems] = useState([]);
 
   const [currentCashflow, setCurrentCashflow] = useState("income");
-  const [username, setUsername] = useState("Try it");
+  const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showTryItModal, setShowTryItModal] = useState(false);
 
   const chartData = {};
 
@@ -54,20 +56,18 @@ const Home = () => {
   getChartData();
 
   useEffect(() => {
-    const incomeItemsStr = localStorage.getItem("incomeItemsStr");
-    const expenseItemsStr = localStorage.getItem("expenseItemsStr");
+    const budgetAppDataStr = localStorage.getItem("budgetAppData");
+    const budgetAppData = budgetAppDataStr
+      ? JSON.parse(budgetAppDataStr)
+      : undefined;
 
-    if (incomeItemsStr && incomeItems.length > 0) {
-      const incomeItemsObj = JSON.parse(incomeItemsStr);
-      initialIncomeItems = incomeItemsObj;
+    if (budgetAppData?.username) {
+      setUsername(budgetAppData.username);
+      initialIncomeItems = budgetAppData.incomeItems;
+      initialExpenseItems = budgetAppData.expenseItems;
     } else {
+      setUsername("Try it");
       initialIncomeItems = incomeItemsList;
-    }
-
-    if (expenseItemsStr && expenseItems.length > 0) {
-      const expenseItemsObj = JSON.parse(expenseItemsStr);
-      initialExpenseItems = expenseItemsObj;
-    } else {
       initialExpenseItems = expenseItemsList;
     }
 
@@ -98,14 +98,44 @@ const Home = () => {
     setAvailableBudget(initialAvailableBudget);
   }, [incomeItems, expenseItems]);
 
-  const handleTryIt = () => {
-    console.log("Try it");
+  const handleShowDeleteModal = () => setShowDeleteModal(true);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+
+  const handleShowTryItModal = () => setShowTryItModal(true);
+  const handleCloseTryItModal = () => setShowTryItModal(false);
+
+  const handleTryIt = (username) => {
+    if (!username) {
+      username = "Try It";
+      setUsername(username);
+
+      setIncomeItems(incomeItemsList);
+      setExpenseItems(expenseItemsList);
+      setCurrentCashflow("income");
+
+      handleCloseTryItModal();
+
+      return;
+    }
+
+    setUsername(username);
+    localStorage.setItem(
+      "budgetAppData",
+      JSON.stringify({
+        username,
+        incomeItems: [],
+        expenseItems: [],
+      })
+    );
+
     initialIncomeItems = [];
     initialExpenseItems = [];
 
     setIncomeItems([]);
     setExpenseItems([]);
     setCurrentCashflow("income");
+
+    handleCloseTryItModal();
   };
 
   const handleSubmit = (e) => {
@@ -145,37 +175,57 @@ const Home = () => {
 
     const now = new Date();
     const date = now.getDate();
-    const month = now.getMonth() + 1; // month starts with 0
+    const month = now.getMonth() + 1; // month starts at 0
     const year = now.getFullYear();
 
     if (currentCashflow === "income") {
       setTotalIncome((prev) => prev + amount);
       setAvailableBudget((prev) => prev + amount);
-      setIncomeItems((prev) => [
-        ...prev,
-        {
-          cashflow: "income",
-          year,
-          month,
-          date,
-          reason,
-          amount,
-        },
-      ]);
+
+      const prevIncomeItems = [...incomeItems];
+      const currentIncomeItem = {
+        cashflow: "income",
+        year,
+        month,
+        date,
+        reason,
+        amount,
+      };
+
+      setIncomeItems((prev) => [...prev, currentIncomeItem]);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: [...prevIncomeItems, currentIncomeItem],
+          expenseItems: [...expenseItems],
+        })
+      );
     } else if (currentCashflow === "expense") {
       setTotalExpense((prev) => prev + amount);
       setAvailableBudget((prev) => prev - amount);
-      setExpenseItems((prev) => [
-        ...prev,
-        {
-          cashflow: "expense",
-          year,
-          month,
-          date,
-          reason,
-          amount,
-        },
-      ]);
+
+      const prevExpenseItems = [...expenseItems];
+      const currentExpenseItems = {
+        cashflow: "expense",
+        year,
+        month,
+        date,
+        reason,
+        amount,
+      };
+
+      setExpenseItems((prev) => [...prev, currentExpenseItems]);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: [...incomeItems],
+          expenseItems: [...expenseItems, currentExpenseItems],
+        })
+      );
     }
 
     setErrors({});
@@ -195,6 +245,15 @@ const Home = () => {
       setIncomeItems(incomeItemsUpdated);
       setTotalIncome((prev) => prev - amount);
       setAvailableBudget((prev) => prev - amount);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: incomeItemsUpdated,
+          expenseItems: expenseItems,
+        })
+      );
     }
 
     if (item.cashflow === "expense") {
@@ -203,14 +262,30 @@ const Home = () => {
       setExpenseItems(expenseItemsUpdated);
       setTotalExpense((prev) => prev - amount);
       setAvailableBudget((prev) => prev + amount);
+
+      localStorage.setItem(
+        "budgetAppData",
+        JSON.stringify({
+          username,
+          incomeItems: incomeItems,
+          expenseItems: expenseItemsUpdated,
+        })
+      );
     }
 
     getChartData();
+    handleCloseDeleteModal();
   };
 
   return (
-    <section id="dashboard" className="mb-32">
-      <Navbar username={username} onTryIt={handleTryIt} />
+    <section id="dashboard" className="mb-56">
+      <Navbar
+        username={username}
+        showModal={showTryItModal}
+        onShowModal={handleShowTryItModal}
+        onCloseModal={handleCloseTryItModal}
+        onTryIt={handleTryIt}
+      />
 
       <div className="container">
         <Budget
@@ -255,22 +330,30 @@ const Home = () => {
               <CashflowTable
                 items={incomeItems}
                 currency={currency}
+                showModal={showDeleteModal}
+                onShowModal={handleShowDeleteModal}
+                onCloseModal={handleCloseDeleteModal}
                 onDelete={handleDeleteItem}
               />
             ) : (
               <CashflowTable
                 items={expenseItems}
                 currency={currency}
+                showModal={showDeleteModal}
+                onShowModal={handleShowDeleteModal}
+                onCloseModal={handleCloseDeleteModal}
                 onDelete={handleDeleteItem}
               />
             )}
           </div>
 
-          <div className="md:w-2/5">
-            <div className="mt-10 md:max-lg:mt-20 lg:ml-16 ">
-              {<PieChart data={chartData} />}
+          {chartData.labels.length > 0 && (
+            <div className="md:w-2/5">
+              <div className="mt-10 md:max-lg:mt-20 lg:ml-16 ">
+                {<PieChart data={chartData} />}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

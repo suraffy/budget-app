@@ -6,7 +6,6 @@ const Form = ({ errors, inputReasonRef, onSubmit }) => {
           type="text"
           name="reason"
           placeholder="Reason"
-          // required
           autoFocus
           ref={inputReasonRef}
           autoComplete="off"
@@ -21,9 +20,7 @@ const Form = ({ errors, inputReasonRef, onSubmit }) => {
         <input
           type="number"
           name="amount"
-          // min={0}
           placeholder="Amount in $"
-          // required
           className={`  ${
             errors.amount ? "border border-red-500" : ""
           }  py-1.5 px-2.5 outline-none bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500`}
